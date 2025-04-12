@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Players</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Select Number of Players</h1>
+        <p>Room Code: <span id="roomCodeDisplay"></span></p>
+
+        <label for="numPlayers">Choose the number of players:</label>
+        <select id="numPlayers">
+            <option value="2">2 Players</option>
+            <option value="3">3 Players</option>
+            <option value="4">4 Players</option>
+            <option value="5">5 Players</option>
+        </select>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomCode = urlParams.get('roomCode');
+        const sessionId = urlParams.get('sessionId');
+        document.getElementById('roomCodeDisplay').textContent = roomCode;
+
+        function startGame() {
+            fetch('start_game.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `sessionId=${sessionId}&numPlayers=${document.getElementById('numPlayers').value}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.href = `display_word.html?sessionId=${sessionId}`;
+                } else {
+                    alert(data.message || 'Error starting the game');
+                }
+            })
+            .catch(error => console.error('Error starting game:', error));
+        }
+    </script>
+</body>
+</html>

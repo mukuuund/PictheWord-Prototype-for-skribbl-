@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicTheWord - Game</title>
+    <link rel="stylesheet" href="css/game.css?v=1.5">
+</head>
+<body>
+    <div class="game-container">
+        <div class="top-bar">
+            <div class="word-display">
+                <span id="wordToDraw">"PIC THE WORD"</span>
+            </div>
+            <div class="timer">
+                <span>Time Left: <strong id="timer">60</strong>s</span>
+            </div>
+        </div>
+
+        <div class="main-section">
+            <div class="canvas-section">
+                <canvas id="gameCanvas" width="500" height="500"></canvas>
+                <button id="clearCanvas" class="control-btn">Clear Canvas</button>
+            </div>
+        </div>
+
+        <div class="chat-section">
+            <h2 style="color: white;">Chat</h2>
+            <div id="chatBox" class="chat-box"></div>
+            <div class="chat-input">
+                <input type="text" id="chatMessage" placeholder="Type a message">
+                <button id="sendMessage" class="control-btn">Send</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

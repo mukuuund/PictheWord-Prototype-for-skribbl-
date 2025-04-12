@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Loading...</h1>
+        <p>Waiting for the game to start. Please wait.</p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('sessionId');
+        const username = urlParams.get('username');
+
+        // Function to check if the game has started
+        function checkGameStatus() {
+            fetch(`check_game_status.php?sessionId=${sessionId}`)
+                .then(response => response.json())
+                .then(data => {
+                if (data.status === 'active') {
+                    window.location.href = `game.html?sessionId=${sessionId}`;
+                } else if (data.status === 'waiting') {
+                    setTimeout(checkGameStatus, 3000); // Retry every 3 seconds
+                } else {
+                    alert(data.message || 'Unexpected error');
+                }
+        })
+        .catch(error => console.error('Error checking game status:', error));
+}
+
+
+        // Start checking game status
+        checkGameStatus();
+    </script>
+</body>
+</html>

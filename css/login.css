@@ -1,0 +1,36 @@
+/* login.css */
+
+/* Specific styles for the login page */
+#joinRoomSection {
+    display: none;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 12px;
+    font-size: 1.2rem;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin: 10px 0;
+}
+
+button {
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#joinRoomSection input {
+    margin-top: 20px;
+}

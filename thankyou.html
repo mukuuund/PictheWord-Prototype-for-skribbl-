@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Playing</title>
+    <link rel="stylesheet" href="css/thankyou.css">
+</head>
+<body>
+    <div class="thank-you-container">
+        <h1>Thank You for Playing!</h1>
+        <p>We hope you enjoyed the game. Come back soon!</p>
+        <button id="playAgain" class="control-btn">Play Again</button>
+    </div>
+
+    <script>
+        // Redirect back to the game page
+        document.getElementById('playAgain').addEventListener('click', () => {
+            window.location.href = 'game.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicTheWord - Login</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to PicTheWord</h1>
+        <label for="username">Enter your In-Game Name:</label>
+        <input type="text" id="username" placeholder="Your name" required>
+
+        <div class="button-group">
+            <button onclick="createRoom()">Create Room</button>
+            <button onclick="enterRoom()">Enter Room</button>
+        </div>
+
+        <!-- Hidden section for entering room code -->
+        <div id="joinRoomSection" style="display: none;">
+            <label for="roomCode">Enter Room Code:</label>
+            <input type="text" id="roomCode" placeholder="Room Code">
+            <button onclick="submitRoomCode()">Join Room</button>
+        </div>
+    </div>
+
+    <script src="login_script.js"></script>
+</body>
+</html>

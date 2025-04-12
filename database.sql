@@ -1,0 +1,43 @@
+CREATE DATABASE PICTHEWORD;
+USE PICTHEWORD;
+
+CREATE TABLE users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(255) NOT NULL UNIQUE,
+    IsHost TINYINT(1) DEFAULT 0
+);
+
+CREATE TABLE words (
+    WordID INT AUTO_INCREMENT PRIMARY KEY,
+    Word VARCHAR(255) NOT NULL UNIQUE,
+    Difficulty INT DEFAULT 1
+);
+
+CREATE TABLE gamesessions (
+    SessionID INT AUTO_INCREMENT PRIMARY KEY,
+    HostID INT NOT NULL,
+    RoomCode VARCHAR(64) UNIQUE,
+    NumPlayers INT DEFAULT 0,
+    IsActive TINYINT(1) DEFAULT 1,
+    WordID INT,
+    StartDateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    EndDateTime DATETIME,
+    FOREIGN KEY (HostID) REFERENCES users(UserID),
+    FOREIGN KEY (WordID) REFERENCES words(WordID)
+);
+
+CREATE TABLE playersinsessions (
+    SessionID INT NOT NULL,
+    PlayerID INT NOT NULL,
+    PRIMARY KEY (SessionID, PlayerID),
+    FOREIGN KEY (SessionID) REFERENCES gamesessions(SessionID),
+    FOREIGN KEY (PlayerID) REFERENCES users(UserID)
+);
+
+CREATE TABLE sessionplayers (
+    SessionID INT NOT NULL,
+    PlayerID INT NOT NULL,
+    PRIMARY KEY (SessionID, PlayerID),
+    FOREIGN KEY (SessionID) REFERENCES gamesessions(SessionID),
+    FOREIGN KEY (PlayerID) REFERENCES users(UserID)
+);

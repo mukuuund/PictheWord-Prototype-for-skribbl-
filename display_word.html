@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Word</title>
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        .word-display {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: whitesmoke;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Word to Draw</h1>
+        <div id="wordDisplay" class="word-display">
+            Loading word...
+        </div>
+        <button onclick="startDrawing()">Start Drawing</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('sessionId');
+
+        function fetchWord() {
+            fetch(`fetch_word.php?sessionId=${sessionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('wordDisplay').innerText = data.word;
+                    } else {
+                        document.getElementById('wordDisplay').innerText = 'Error fetching word.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching word:', error);
+                    document.getElementById('wordDisplay').innerText = 'Error fetching word.';
+                });
+        }
+
+        function startDrawing() {
+            window.location.href = `game.html?sessionId=${sessionId}`;
+        }
+
+        // Fetch the word immediately when the page loads
+        fetchWord();
+    </script>
+</body>
+</html>
